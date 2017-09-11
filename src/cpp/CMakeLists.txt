@@ -103,6 +103,8 @@ check_cxx_compiler_flag(-Wno-unused-function HAS_WNO_UNUSED_FUNCTION_COMPILERFLA
 check_cxx_compiler_flag(-ggdb HAS_GGDB_COMPILERFLAG)
 check_cxx_compiler_flag(-ggdb3 HAS_GGDB3_COMPILERFLAG)
 check_cxx_compiler_flag(-O3 HAS_O3_COMPILERFLAG)
+check_cxx_compiler_flag(--static-libstdc++ HAS_STATIC_LIBSTDCXX_FLAG)
+check_cxx_compiler_flag(--static-libc++ HAS_STATIC_LIBCXX_FLAG)
 check_cxx_compiler_flag(/Oi HAS_OI_COMPILERFLAG)
 check_cxx_compiler_flag(/w HAS_NO_WARNINGS) #if given to cl.exe, no output will be printed to the console
 check_cxx_compiler_flag(/W1 HAS_VS_W1_WARNINGS) #see https://msdn.microsoft.com/en-us/library/thxezb7y.aspx for details
@@ -290,6 +292,19 @@ if(${BUNDLE_SQEAZY})
   set(LZ4_USE_STATIC_LIBS ON)
   set(HDF5_USE_STATIC_LIBRARIES ON)
   set(FFMPEG_USE_STATIC_LIBS ON)
+
+  if(HAS_STATIC_LIBSTDCXX_FLAG)
+    add_definitions(--static-libstdc++)
+    set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "--static-libstdc++")
+    set(CMAKE_SHARED_LINKER_FLAGS ${CMAKE_SHARED_LINKER_FLAGS} "--static-libstdc++")
+  endif()
+
+  if(HAS_STATIC_LIBCXX_FLAG)
+    add_definitions(--static-libc++)
+    set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "--static-libc++")
+    set(CMAKE_SHARED_LINKER_FLAGS ${CMAKE_SHARED_LINKER_FLAGS} "--static-libc++")
+  endif()
+
 
 endif()
 
