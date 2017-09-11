@@ -293,17 +293,18 @@ if(${BUNDLE_SQEAZY})
   set(HDF5_USE_STATIC_LIBRARIES ON)
   set(FFMPEG_USE_STATIC_LIBS ON)
 
-  if(HAS_STATIC_LIBSTDCXX_FLAG)
-    add_definitions(-static-libstdc++)
-    set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-static-libstdc++")
-    set(CMAKE_SHARED_LINKER_FLAGS ${CMAKE_SHARED_LINKER_FLAGS} "-static-libstdc++")
-  endif()
-
   if(HAS_STATIC_LIBGCC_FLAG)
     add_definitions(-static-libgcc)
-    set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-static-libgcc")
-    set(CMAKE_SHARED_LINKER_FLAGS ${CMAKE_SHARED_LINKER_FLAGS} "-static-libgcc")
+#    set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-static-libgcc")
+#    set(CMAKE_SHARED_LINKER_FLAGS ${CMAKE_SHARED_LINKER_FLAGS} "-static-libgcc")
   endif()
+
+  if(HAS_STATIC_LIBSTDCXX_FLAG)
+    add_definitions(-static-libstdc++)
+#    set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-static-libstdc++")
+#    set(CMAKE_SHARED_LINKER_FLAGS ${CMAKE_SHARED_LINKER_FLAGS} "-static-libstdc++")
+  endif()
+
 
 
 endif()
