@@ -157,12 +157,12 @@ public class SqeazyLibraryTests
     @Test
     public void testpipeline_RoundTRIP() throws IOException
 		{
-			final String lPipeline = "quantiser->lz4";//TODO dropped any video codec as it is not contained in bundle
+			final String lPipeline = "lz4";//TODO dropped any video codec as it is not contained in bundle
 			final Pointer<Byte> bPipelineName = Pointer.pointerToCString(lPipeline);
 	    
-			final int lWidth  = 128;
-			final int lHeight = 128;
-			final int lDepth  = 256;
+			final int lWidth  = 64;
+			final int lHeight = 64;
+			final int lDepth  = 32;
 
 			final int lBufferLengthInShorts = lWidth * lHeight * lDepth;
 			final long lBufferLengthInByte = lBufferLengthInShorts*2;
