@@ -176,17 +176,17 @@ target_link_libraries(test_yuv_utils ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES})
 IF(TIFF_FOUND)
 
 add_executable(test_tiff_fixture test_tiff_fixture.cpp)
-target_link_libraries(test_tiff_fixture ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY})
+target_link_libraries(test_tiff_fixture ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} z)
 set_target_properties(test_tiff_fixture PROPERTIES COMPILE_FLAGS "-I${PROJECT_SOURCE_DIR}/bench")
 
 
 
 
 add_executable(test_huffman_utils_impl test_huffman_utils_impl.cpp)
-target_link_libraries(test_huffman_utils_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY})
+target_link_libraries(test_huffman_utils_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} z)
 
 add_executable(test_volume_fixtures test_volume_fixtures.cpp)
-target_link_libraries(test_volume_fixtures ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY})
+target_link_libraries(test_volume_fixtures ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} z)
 
 add_executable(test_sqeazy_pipelines_impl test_sqeazy_pipelines_impl.cpp)
 add_executable(test_hdf5_impl test_hdf5_impl.cpp)
@@ -208,24 +208,24 @@ IF((${WITH_FFMPEG} EQUAL "ON") AND (DEFINED ${FFMPEG_FOUND}))
     set(SQY_FFMPEG_Libraries ${SQY_FFMPEG_Libraries} ${FFMPEG_EXTRA_LINK_FLAGS})
   endif()
 
-  target_link_libraries(test_sqeazy_pipelines_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} ${SQY_FFMPEG_Libraries} ${LZ4_LIBRARY})
+  target_link_libraries(test_sqeazy_pipelines_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} z ${SQY_FFMPEG_Libraries} ${LZ4_LIBRARY})
 
   add_executable(test_avcodec_sandbox test_avcodec_sandbox.cpp)
-  target_link_libraries(test_avcodec_sandbox ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} ${SQY_FFMPEG_Libraries})
+  target_link_libraries(test_avcodec_sandbox ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} z ${SQY_FFMPEG_Libraries})
 
   add_executable(test_hevc_scheme_impl test_hevc_scheme_impl.cpp)
-  target_link_libraries(test_hevc_scheme_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} ${SQY_FFMPEG_Libraries})
+  target_link_libraries(test_hevc_scheme_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} z ${SQY_FFMPEG_Libraries})
 
   add_executable(test_h264_scheme_impl test_h264_scheme_impl.cpp)
-  target_link_libraries(test_h264_scheme_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} ${SQY_FFMPEG_Libraries})
+  target_link_libraries(test_h264_scheme_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} z ${SQY_FFMPEG_Libraries})
 
   add_executable(test_video_utils_impl test_video_utils_impl.cpp)
-  target_link_libraries(test_video_utils_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} ${SQY_FFMPEG_Libraries})
+  target_link_libraries(test_video_utils_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} z ${SQY_FFMPEG_Libraries})
 
 
 
   add_executable(test_hevc_scheme_utils test_hevc_scheme_utils.cpp)
-  target_link_libraries(test_hevc_scheme_utils ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} ${SQY_FFMPEG_Libraries})
+  target_link_libraries(test_hevc_scheme_utils ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} z ${SQY_FFMPEG_Libraries})
 
 
 
@@ -235,13 +235,13 @@ IF((${WITH_FFMPEG} EQUAL "ON") AND (DEFINED ${FFMPEG_FOUND}))
 
 ELSE()
   MESSAGE(">> [tests] ffmpeg switched off or libavcodec not found not found. skipping test_avcodec_sandbox ...")
-  target_link_libraries(test_sqeazy_pipelines_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} ${LZ4_LIBRARY})
+  target_link_libraries(test_sqeazy_pipelines_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} z ${LZ4_LIBRARY})
   target_link_libraries(test_hdf5_impl ${HDF5_LIBRARIES} ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${LZ4_LIBRARY})
 ENDIF()
 
 
 
-#target_link_libraries(test_bench_utils_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY})
+#target_link_libraries(test_bench_utils_impl ${OpenMP++_LIBRARIES} ${Boost_LIBRARIES} ${TIFF_LIBRARY} z)
 
 ENDIF(TIFF_FOUND)
 
